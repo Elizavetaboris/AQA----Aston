@@ -11,8 +11,12 @@ public class Main {
         zerArr(ar);
         hundArr(arr);
         lessArr(lar);
-        int size = 5; int [][] twoDim= new int[size][size];
+        int size = 4; int [][] twoDim= new int[size][size];
         twoDimArr(twoDim,size);
+        int len = 5;
+        int initialValue = 2;
+        int[] resultArray = crArr(len, initialValue);
+        printArray(resultArray);
 
     }
 
@@ -89,7 +93,7 @@ public class Main {
                }
             }
             for (int number : lar) {
-                System.out.print(number + " ");
+                System.out.println(number + " ");
             }
         }
     }
@@ -104,7 +108,21 @@ public class Main {
             System.out.println();
         }
     }
+    public static int[] crArr(int len, int initialValue) {
+        int[] newarray = new int[len];
+        for (int i = 0; i < len; i++) {
+            newarray[i] = initialValue;
+        }
+        return newarray;
+    }
+    public static void printArray(int[] arr) {
+        for (int number : arr) {
+            System.out.print(number + " ");
+        }
+    }
+
 }
+
 
 
 
