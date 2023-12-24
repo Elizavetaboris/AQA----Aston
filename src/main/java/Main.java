@@ -3,6 +3,7 @@ public class Main {
         withIn(2, 10);
         numberCheck(-10);
         numCheck(12);
+        numStr("Liza",5);
 
     }
 
@@ -29,6 +30,11 @@ public class Main {
             System.out.println("True");
         } else {
             System.out.println("False");
+        }
+    }
+    public static void numStr(String a,int b){
+        for(int i=0;i<b;i++){
+            System.out.println(a);
         }
     }
 }
