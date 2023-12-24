@@ -11,6 +11,8 @@ public class Main {
         zerArr(ar);
         hundArr(arr);
         lessArr(lar);
+        int size = 5; int [][] twoDim= new int[size][size];
+        twoDimArr(twoDim,size);
 
     }
 
@@ -89,6 +91,17 @@ public class Main {
             for (int number : lar) {
                 System.out.print(number + " ");
             }
+        }
+    }
+    public static void twoDimArr(int[][] twoDim,int size){
+        for (int i = 0; i < size; i++) {
+            twoDim[i][i] = 1;
+        }
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                System.out.print(twoDim[i][j] + " " );
+            }
+            System.out.println();
         }
     }
 }
