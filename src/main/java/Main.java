@@ -84,7 +84,7 @@ public class Main {
             for (int i = 0; i < lar.length; i++) {
                if( lar[i] < 6 ) {
                    lar[i] = lar[i] * 2;
-               };
+               }
             }
             for (int number : lar) {
                 System.out.print(number + " ");
