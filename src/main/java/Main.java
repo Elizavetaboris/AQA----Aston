@@ -7,8 +7,10 @@ public class Main {
         leyeCheck(2024);
         int[] ar = {1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1,};
         int[] arr = new int[100];
+        int[] lar ={1,5,3,2,11,4,5,2,4,8,9,1};
         zerArr(ar);
         hundArr(arr);
+        lessArr(lar);
 
     }
 
@@ -69,14 +71,28 @@ public class Main {
     public static void hundArr(int[] arr) {
         {
             for (int i = 0; i < arr.length; i++) {
-               arr[i]= i+1;
+                arr[i] = i + 1;
             }
             for (int number : arr) {
                 System.out.println(number + " ");
             }
         }
     }
+
+    public static void lessArr(int[] lar) {
+        {
+            for (int i = 0; i < lar.length; i++) {
+               if( lar[i] < 6 ) {
+                   lar[i] = lar[i] * 2;
+               };
+            }
+            for (int number : lar) {
+                System.out.print(number + " ");
+            }
+        }
+    }
 }
+
 
 
 
