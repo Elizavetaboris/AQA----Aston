@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         withIn(2, 10);
@@ -5,21 +7,20 @@ public class Main {
         numCheck(12);
         numStr("Liza", 2);
         leyeCheck(2024);
-        int[] ar = {1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1,};
+        int[] ar = {1, 0, 1, 0, 1, 1,0,1,0,1,0,1,0,};
         int[] arr = new int[100];
-        int[] lar ={1,5,3,2,11,4,5,2,4,8,9,1};
+        int[] lar = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
         zerArr(ar);
         hundArr(arr);
         lessArr(lar);
-        int size = 4; int [][] twoDim= new int[size][size];
-        twoDimArr(twoDim,size);
+        int size = 4;
+        int[][] twoDim = new int[size][size];
+        twoDimArr(twoDim, size);
         int len = 5;
         int initialValue = 2;
-        int[] resultArray = crArr(len, initialValue);
-        printArray(resultArray);
-
+        int[] result = crArr(len, initialValue);
+        System.out.println("result: " + Arrays.toString(result));
     }
-
     public static void withIn(int a, int b) {
         int sum = a + b;
         if (sum >= 10 && sum <= 20) {
@@ -28,7 +29,6 @@ public class Main {
             System.out.println("False");
         }
     }
-
     public static void numberCheck(int a) {
         if (a >= 0) {
             System.out.println("Положительное число");
@@ -36,7 +36,6 @@ public class Main {
             System.out.println("Отрицательное число");
         }
     }
-
     public static void numCheck(int a) {
         if (a >= 0) {
             System.out.println("True");
@@ -44,13 +43,11 @@ public class Main {
             System.out.println("False");
         }
     }
-
     public static void numStr(String a, int b) {
         for (int i = 0; i < b; i++) {
             System.out.println(a);
         }
     }
-
     public static void leyeCheck(int year) {
         if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
             System.out.println("True");
@@ -58,22 +55,16 @@ public class Main {
             System.out.println("False");
         }
     }
-
     public static void zerArr(int[] ar) {
-        {
             for (int i = 0; i < ar.length; i++) {
                 if (ar[i] == 1) {
                     ar[i] = 0;
-                } else if (ar[i] == 0) {
+                } else  {
                     ar[i] = 1;
                 }
             }
-            for (int number : ar) {
-                System.out.print(number + " ");
-            }
-        }
+        System.out.println(Arrays.toString(ar));
     }
-
     public static void hundArr(int[] arr) {
         {
             for (int i = 0; i < arr.length; i++) {
@@ -84,7 +75,6 @@ public class Main {
             }
         }
     }
-
     public static void lessArr(int[] lar) {
         {
             for (int i = 0; i < lar.length; i++) {
@@ -109,18 +99,10 @@ public class Main {
         }
     }
     public static int[] crArr(int len, int initialValue) {
-        int[] newarray = new int[len];
-        for (int i = 0; i < len; i++) {
-            newarray[i] = initialValue;
-        }
-        return newarray;
+        int[] arr = new int[len];
+        Arrays.fill(arr,initialValue);
+        return arr;
     }
-    public static void printArray(int[] arr) {
-        for (int number : arr) {
-            System.out.print(number + " ");
-        }
-    }
-
 }
 
 
