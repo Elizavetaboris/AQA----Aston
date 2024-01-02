@@ -1,5 +1,7 @@
+package Zoo;
+
 class Cat extends Animal{
-    private int appetite;
+    private final int appetite;
     private boolean satiety;
 
 

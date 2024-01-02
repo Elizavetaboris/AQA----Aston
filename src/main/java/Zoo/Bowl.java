@@ -1,3 +1,5 @@
+package Zoo;
+
 public class Bowl {
     private int food;
     Bowl(int food){

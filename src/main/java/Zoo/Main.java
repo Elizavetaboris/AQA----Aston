@@ -1,3 +1,5 @@
+package Zoo;
+
 public class Main {
     public static void main(String[] args) {
         Dog dog1 = new Dog("Лео");
@@ -7,8 +9,8 @@ public class Main {
         dog1.anRun(400);
         dog2.anSwim(5);
 
-        Cat cat1 = new Cat("Мурзик",4);
-        Cat cat2= new Cat("Пушистик",100);
+        Cat cat1 = new Cat("Мурзик",10);
+        Cat cat2= new Cat("Пушистик",5);
         cat1.anRun(100);
         cat1.anSwim(300);
         cat2.anRun(200);

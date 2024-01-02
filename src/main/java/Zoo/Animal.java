@@ -1,3 +1,5 @@
+package Zoo;
+
 public class Animal {
     String name;
     static int animalsCount;
