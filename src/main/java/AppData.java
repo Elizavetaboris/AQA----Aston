@@ -4,7 +4,6 @@ import java.util.Arrays;
 public class AppData {
     public String[] header;
     public int[][] data;
-
     public void save(String filename) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
             writer.println(String.join(";", header));
@@ -13,11 +12,8 @@ public class AppData {
             }
         } catch (IOException e) {
             e.printStackTrace();
-
         }
     }
-
-
     public void load(String filePath) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             header = reader.readLine().split(";");
@@ -43,6 +39,5 @@ public class AppData {
             e.printStackTrace();
         }
     }
-
 }
 

@@ -7,19 +7,15 @@ public class Main {
         appData.header = new String[]{"Value1", "Value2", "Value3"};
         appData.data = new int[][]{{100,200,300}, {300,400,500}};
 
-
-        appData.save("data.csv"); // Сохранение данных в CSV-файл
+        appData.save("data.csv");
 
         AppData loadedData = new AppData();
-        loadedData.load("data.csv"); // Загрузка данных из CSV-файла
+        loadedData.load("data.csv");
 
-        // Пример вывода загруженных данных
         System.out.println("Header: " + Arrays.toString(loadedData.header));
         for (int[] row : loadedData.data) {
             System.out.println(Arrays.toString(row));
         }
-
-
     }
 }
 
