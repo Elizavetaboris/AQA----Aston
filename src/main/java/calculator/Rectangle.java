@@ -24,13 +24,22 @@ class Rectangle implements Shape {
     }
 
     @Override
-    public String getBorderColor() {
-
-        return borderColor;
-    }
+    public String getBorderColor() {return borderColor;}
 
     @Override
     public String getFillColor() {
         return fillColor;
+    }
+    public String getRectangleInfo() {
+        StringBuilder info = new StringBuilder();
+        info.append("Rectangle: Area=");
+        info.append(calculateArea());
+        info.append(", Perimeter=");
+        info.append(calculatePerimeter());
+        info.append(", Border Color=");
+        info.append(borderColor);
+        info.append(", Fill Color=");
+        info.append(fillColor);
+        return info.toString();
     }
 }
