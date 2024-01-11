@@ -1,5 +1,4 @@
 package Zoo;
-
 public class Main {
     public static void main(String[] args) {
         Dog dog1 = new Dog("Лео");
@@ -11,12 +10,13 @@ public class Main {
 
         Cat cat1 = new Cat("Мурзик",10);
         Cat cat2= new Cat("Пушистик",5);
+        Cat cat3= new Cat("Ляля", 20);
         cat1.anRun(100);
         cat1.anSwim(300);
         cat2.anRun(200);
         cat2.anSwim(100);
 
-        System.out.println("Кол-во созданных животных: "+ Animal.animalsCount);
+        System.out.println("Кол-во созданных животных: "+ Animal.animalCount);
 
         Cat[] cats = {new Cat("Кузя",6),new Cat("Барсик",4),new Cat("Рон",3)};
         Bowl bowl = new Bowl(10);
