@@ -14,8 +14,14 @@ public class Main {
         }
     }
     public static int sumArray(String[][] array) throws MyArraySizeException, MyArrayDataException {
-        if (array.length != 4 || array[0].length != 4 || array[1].length != 4 || array[2].length != 4 || array[3].length != 4) {
+        if (array.length != 4) {
             throw new MyArraySizeException("Неверный размер массива");
+        }
+
+        for (String[] row : array) {
+            if (row.length != 4) {
+                throw new MyArraySizeException("Неверный размер массива");
+            }
         }
 
         int sum = 0;
