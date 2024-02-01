@@ -8,7 +8,7 @@ public class Main {
     @Test
     @DisplayName("Проверка расчёта факториала")
     @ParameterizedTest
-    @CsvSource({"120,5", "720,6", "5040,7", "40320,8", "362880,9", " 3628800,10", "39916800,11"})
+    @CsvSource({"24,4", "120,5", "720,6", "5040,7", "40320,8", " 362880,9", "3628800,10"})
     public void factorialTest(int expectedValue, int actualValue) {
         Factorial factorial = new Factorial();
         Assertions.assertEquals(expectedValue, factorial.getFactorial(actualValue));
