@@ -1,6 +1,6 @@
 import java.util.stream.IntStream;
 
-public class Factorial {
+public class Factorial{
     public int getFactorial(int f) {
         if (f <= 1) {
             return 1;

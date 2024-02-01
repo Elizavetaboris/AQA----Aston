@@ -1,16 +1,16 @@
-import org.junit.gen5.api.DisplayName;
-import org.junit.gen5.api.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 public class Main {
-    @Test
-    @DisplayName("Проверка расчёта факториала")
-    @ParameterizedTest
-    @CsvSource({"120,5", "720,6", "5040,7", "40320,8", "362880,9", " 3628800,10", "39916800,11"})
+    @DataProvider(name = "Проверка на факториал")
+    public static Object[][] primeNumbers() {
+        return new Object[][]{{1, 1}, {2, 2}, {6, 3}, {24, 4}, {120, 5}, {720, 6}, {5040, 7}};
+    }
+
+    @Test(dataProvider = "Проверка на факториал")
     public void factorialTest(int expectedValue, int actualValue) {
         Factorial factorial = new Factorial();
-        Assertions.assertEquals(expectedValue, factorial.getFactorial(actualValue));
+        Assert.assertEquals(expectedValue, factorial.getFactorial(actualValue));
     }
 }
