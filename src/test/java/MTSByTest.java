@@ -8,7 +8,6 @@ public class MTSByTest extends Settings {
 
     @Test
     public void checkLink() {
-
         driver.findElement(By.xpath("//a[contains(.,'Подробнее о сервисе')]")).click();
         // Возвращаемся на предыдущую страницу
         driver.navigate().back();
