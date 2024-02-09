@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class MTSByTest extends Settings {
 
     @Test
-    public void checkLink() {
+    public void testLink() {
         driver.findElement(By.xpath("//a[contains(.,'Подробнее о сервисе')]")).click();
         // Возвращаемся на предыдущую страницу
         driver.navigate().back();
@@ -36,7 +36,7 @@ public class MTSByTest extends Settings {
          Assert.assertEquals(onlinePayFormText.getText(), "Онлайн пополнение\nбез комиссии");
         }
     @Test
-    public void checkButtons() {
+    public void testButtons() {
          WebElement selectNow = driver.findElement(By.xpath("//button[contains(.,'Услуги связи')]"));
 
          WebElement phoneNumberInput = driver.findElement(By.xpath("//input[@placeholder='Номер телефона']"));
