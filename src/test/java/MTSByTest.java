@@ -14,18 +14,18 @@ public class MTSByTest extends Settings {
                 {"Рассрочка", "Номер счета на 44", "Сумма", "E-mail для отправки чека"},
                 {"Задолженность", "Номер счета на 2073", "Сумма", "E-mail для отправки чека"}};
     }
-        @Test(dataProvider = "onlinePayForms")
-        public void testOnlinePayForms(String payment, String placeholder1, String placeholder2, String placeholder3) {
-            getDriver().findElement(By.xpath("//div[@class='pay__form']//div[@class='select__wrapper']")).click();
-            getDriver().findElement(By.xpath(String.format("//div[@class='pay__form']//p[contains(text(), '%s')]", payment))).click();
-            SoftAssert softAssert = new SoftAssert();
-            softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[1]/input")).getAttribute("placeholder"), placeholder1);
-            softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[2]/input")).getAttribute("placeholder"), placeholder2);
-            softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[3]/input")).getAttribute("placeholder"), placeholder3);
-            softAssert.assertAll();
+    @Test(dataProvider = "onlinePayForms")
+    public void testOnlinePayForms(String payment, String placeholder1, String placeholder2, String placeholder3) {
+        getDriver().findElement(By.xpath("//div[@class='pay__form']//div[@class='select__wrapper']")).click();
+        getDriver().findElement(By.xpath(String.format("//div[@class='pay__form']//p[contains(text(), '%s')]", payment))).click();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[1]/input")).getAttribute("placeholder"), placeholder1);
+        softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[2]/input")).getAttribute("placeholder"), placeholder2);
+        softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[3]/input")).getAttribute("placeholder"), placeholder3);
+        softAssert.assertAll();
     }
-        @Test
-        public void testOnlinePaymentForServices() throws InterruptedException {
+    @Test
+    public void testOnlinePaymentForServices() throws InterruptedException {
 
         WebElement selectNow = driver.findElement(By.xpath("//button[contains(.,'Услуги связи')]"));
         // Заполнение полей с реквизитами
