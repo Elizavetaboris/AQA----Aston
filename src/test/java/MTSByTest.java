@@ -1,14 +1,9 @@
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-
-import javax.sound.midi.Soundbank;
-import java.time.Duration;
 
 public class MTSByTest extends Settings {
     @DataProvider(name = "onlinePayForms")
@@ -18,7 +13,6 @@ public class MTSByTest extends Settings {
                 {"Домашний интернет", "Номер абонента", "Сумма", "E-mail для отправки чека"},
                 {"Рассрочка", "Номер счета на 44", "Сумма", "E-mail для отправки чека"},
                 {"Задолженность", "Номер счета на 2073", "Сумма", "E-mail для отправки чека"}};
-
     }
         @Test(dataProvider = "onlinePayForms")
         public void testOnlinePayForms(String payment, String placeholder1, String placeholder2, String placeholder3) {
@@ -29,10 +23,9 @@ public class MTSByTest extends Settings {
             softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[2]/input")).getAttribute("placeholder"), placeholder2);
             softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[3]/input")).getAttribute("placeholder"), placeholder3);
             softAssert.assertAll();
-
-        }
-    @Test
-    public void testOnlinePaymentForServices() throws InterruptedException {
+    }
+        @Test
+        public void testOnlinePaymentForServices() throws InterruptedException {
 
         WebElement selectNow = driver.findElement(By.xpath("//button[contains(.,'Услуги связи')]"));
         // Заполнение полей с реквизитами
@@ -80,7 +73,6 @@ public class MTSByTest extends Settings {
         String text1 = phoneNumber.getText();
         Assert.assertEquals(text1, "Оплата: Услуги связи Номер:375297777777");
         System.out.println("тест на отображение суммы, суммы на кнопке и номера телефона - пройден");
-
 
         //тесты на наличие иконок платежных систем
         WebElement visaIcon = driver.findElement(By.xpath("//label[@class='ng-tns-c47-3 ng-star-inserted']"));
