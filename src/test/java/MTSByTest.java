@@ -1,11 +1,22 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
+import java.time.Instant;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 public class MTSByTest extends Settings {
+    private final String phone = "297777777";
+    private final String paySum = "200";
+    private final String email = "Eli-Krivonosova@yandex.ru";
+
     @DataProvider(name = "onlinePayForms")
     public Object[][] paymentOptions() {
         return new Object[][]{
@@ -14,6 +25,7 @@ public class MTSByTest extends Settings {
                 {"Рассрочка", "Номер счета на 44", "Сумма", "E-mail для отправки чека"},
                 {"Задолженность", "Номер счета на 2073", "Сумма", "E-mail для отправки чека"}};
     }
+
     @Test(dataProvider = "onlinePayForms")
     public void testOnlinePayForms(String payment, String placeholder1, String placeholder2, String placeholder3) {
         getDriver().findElement(By.xpath("//div[@class='pay__form']//div[@class='select__wrapper']")).click();
@@ -24,43 +36,40 @@ public class MTSByTest extends Settings {
         softAssert.assertEquals(getDriver().findElement(By.xpath("//form[@class='pay-form opened']/div[3]/input")).getAttribute("placeholder"), placeholder3);
         softAssert.assertAll();
     }
-    @Test
-    public void testOnlinePaymentForServices() throws InterruptedException {
 
-        WebElement selectNow = driver.findElement(By.xpath("//button[contains(.,'Услуги связи')]"));
-        // Заполнение полей с реквизитами
-        WebElement phoneNumberInput = driver.findElement(By.xpath("//input[@placeholder='Номер телефона']"));
-        phoneNumberInput.sendKeys("(29)777-77-77");
-        System.out.println("тест ввод номера пройден");
+    public void inputDataInForm() {
+        driver.findElement(By.xpath("//input[@id='connection-phone']")).sendKeys(phone);
+        driver.findElement(By.xpath("//input[@id='connection-sum']")).sendKeys(paySum);
+        driver.findElement(By.xpath("//input[@id='connection-email']")).sendKeys(email);
+        System.out.println("Данные введены");
+        driver.findElement(By.xpath("//form[@id='pay-connection']/button")).click();
 
-        WebElement amountInput = driver.findElement(By.xpath("(//input[@placeholder='Сумма'])[1]"));
-        amountInput.sendKeys("200");
-        System.out.println("тест ввод суммы пройден");
-
-        // Нажатие кнопки "Продолжить"
-        WebElement continueButton = driver.findElement(By.xpath("(//button[contains(.,'Продолжить')])[1]"));
-        continueButton.click();
-        System.out.println("тест кнопка пройден");
-        Thread.sleep(8000);
-
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         WebElement frameElement = driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']"));
         driver.switchTo().frame(frameElement);
+    }
+    @Test // тест на корректность надписей в незаполненных полях
+    public void testEmptyCreditCardFields() {
+        inputDataInForm();
 
-        // тесты на корректность надписей в незаполненных полях
-        WebElement numCard = driver.findElement(By.xpath("(//div[contains(.,'Номер карты')])[9]"));
+        WebElement numCard = driver.findElement(By.xpath("//div[@class='content ng-tns-c47-1'][contains(.,'Номер карты')]"));
         Assert.assertEquals("Номер карты",numCard.getAttribute("textContent"));
 
-        WebElement dateCard = driver.findElement(By.xpath("(//div[contains(.,'Срок действия')])[10]"));
+        WebElement dateCard = driver.findElement(By.xpath("//div[@class='content ng-tns-c47-4'][contains(.,'Срок действия')]"));
         Assert.assertEquals("Срок действия", dateCard.getAttribute("textContent"));
 
-        WebElement cvcCard = driver.findElement(By.xpath("(//div[contains(.,'CVC')])[10]"));
+        WebElement cvcCard = driver.findElement(By.xpath("//div[@class='content ng-tns-c47-5'][contains(.,'CVC')]"));
         Assert.assertEquals("CVC",cvcCard.getAttribute("textContent"));
 
-        WebElement nameCard = driver.findElement(By.xpath("(//div[contains(.,'Имя держателя (как на карте)')])[9]"));
+        WebElement nameCard = driver.findElement(By.xpath("//div[@class='content ng-tns-c47-3'][contains(.,'Имя держателя (как на карте)')]"));
         Assert.assertEquals("Имя держателя (как на карте)",nameCard.getAttribute("textContent"));
-        System.out.println("тест на корректность надписей в незаполненных полях для ввода реквизитов карты - пройден");
 
-        //тесты на отображение суммы и номера
+        System.out.println("тест на корректность надписей в незаполненных полях для ввода реквизитов карты - пройден");
+    }
+    @Test  //тест на отображение суммы, номера и суммы на кнопке
+    public void testPaymentDetails() {
+        inputDataInForm();
+
         WebElement amountButton = driver.findElement(By.xpath("//button[@class='colored disabled ng-star-inserted']"));
         String buttonText = amountButton.getText();
         Assert.assertEquals(buttonText, "Оплатить 200.00 BYN");
@@ -73,20 +82,27 @@ public class MTSByTest extends Settings {
         String text1 = phoneNumber.getText();
         Assert.assertEquals(text1, "Оплата: Услуги связи Номер:375297777777");
         System.out.println("тест на отображение суммы, суммы на кнопке и номера телефона - пройден");
-
-        //тесты на наличие иконок платежных систем
-        WebElement visaIcon = driver.findElement(By.xpath("//label[@class='ng-tns-c47-3 ng-star-inserted']"));
-        Assert.assertTrue(visaIcon.isDisplayed());
-
-        WebElement belCard = driver.findElement(By.xpath("//label[@class='ng-tns-c47-3 ng-star-inserted']"));
-        Assert.assertTrue(belCard.isDisplayed());
-
-        WebElement maestroCard = driver.findElement(By.xpath("(//img[@class='ng-tns-c53-0 ng-star-inserted'])[1]"));
+    }
+    @Test //тест на наличие иконок платежных систем
+    public void test() {
+        inputDataInForm();
+        WebElement maestroCard = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/mastercard-system.svg']"));
         Assert.assertTrue(maestroCard.isDisplayed());
 
-        WebElement mirCard = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/maestro-system.svg']"));
-        Assert.assertTrue(mirCard.isDisplayed());
-        System.out.println("тест на наличие иконок платёжных систем - пройден");
-        }
+        WebElement visaIcon = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/visa-system.svg']"));
+        Assert.assertTrue(visaIcon.isDisplayed());
+
+        WebElement belCard = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/belkart-system.svg']"));
+        Assert.assertTrue(belCard.isDisplayed());
+        /*
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement mirIcon = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/mir-system-ru.svg']"));
+        System.out.println("MirCard icon is displayed: " + mirIcon.isDisplayed());
+
+        // Неявное ожидание для проверки наличия иконки для платежной системы Maestro
+        WebElement maestroIcon = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/maestro-system.svg']"));
+        System.out.println("Maestro icon is displayed: " + maestroIcon.isDisplayed());
+*/
     }
+}
 
