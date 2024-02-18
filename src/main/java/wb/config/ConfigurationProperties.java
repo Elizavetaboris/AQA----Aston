@@ -5,32 +5,20 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigurationProperties {
-
-    private static final Properties properties = new Properties();
-
-    static {
-        try {
-            FileInputStream fileInputStream = new FileInputStream(
-                Thread.currentThread().getContextClassLoader().getResource("configuration.properties").getPath());
-            properties.load(fileInputStream);
-            fileInputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
     public static String getPlatformAndBrowser() {
-        return properties.getProperty("PLATFORM_AND_BROWSER");
+        return "win_chrome";
     }
 
     public static int getImplicitWait() {
-        return Integer.parseInt(properties.getProperty("IMPLICIT_WAIT"));
+        return 5;
     }
 
     public static int getExplicitWait() {
-        return Integer.parseInt(properties.getProperty("EXPLICIT_WAIT"));
+        return 5;
     }
 
     public static String getWildberriesHomePage() {
-        return properties.getProperty("WILDBERRIES_HOME_PAGE");
+        return "https://www.wildberries.ru/";
     }
+
 }
