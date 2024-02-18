@@ -75,34 +75,31 @@ public class MTSByTest extends Settings {
         Assert.assertEquals("Имя держателя (как на карте)", nameCard.getAttribute("textContent"));
     }
 
-    @Test //тест на наличие иконок платежных систем
+
+    @Test //тест на наличие иконок платежных система наличи
     public void testPaymentIcons() {
         inputDataInForm();
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofMillis(10));
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofMillis(5));
 
-        WebElement masterCard = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/mastercard-system.svg']"));
+        WebElement masterCard = wait.withTimeout(Duration.ofSeconds(5))
+                .until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='assets/images/payment-icons/card-types/mastercard-system.svg']")));
         Assert.assertTrue(masterCard.isDisplayed());
 
-        WebElement visaIcon = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/visa-system.svg']"));
+        WebElement visaIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='assets/images/payment-icons/card-types/visa-system.svg']")));
         Assert.assertTrue(visaIcon.isDisplayed());
 
-        WebElement belCard = driver.findElement(By.xpath("//img[@src='assets/images/payment-icons/card-types/belkart-system.svg']"));
+
+        WebElement belCard = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='assets/images/payment-icons/card-types/belkart-system.svg']")));
         Assert.assertTrue(belCard.isDisplayed());
 
-        WebElement mirIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='assets/images/payment-icons/card-types/mir-system-ru.svg']")));
+
+        WebElement mirIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='assets/images/payment-icons/card-types/mir-system.svg']")));
         Assert.assertTrue(mirIcon.isDisplayed(), "Мир icon is not displayed");
 
-        //неявное ожидание 5 секунд
-        try {
-            Thread.sleep(5000); // Пауза на 5 секунд для смены иконок
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         // повторно ищем и проверяем иконку "маэстро"
         WebElement maestroIcon = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//img[@src='assets/images/payment-icons/card-types/maestro-system.svg']")));
         Assert.assertTrue(maestroIcon.isDisplayed(), "Maestro icon is not displayed");
 
     }
-
 }
 
